@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Colorful Table Example</title>
+    <style>
+      /* Add some basic styling to the table */
+      table {
+        width: 50%;
+        margin: 0 auto;
+        border-collapse: collapse;
+        text-align: center;
+        font-size: 24px;
+      }
+      
+      /* Style the table header row with a different background color */
+      th {
+        background-color: #f1c40f;
+        color: white;
+      }
+      
+      /* Style the table data rows with alternating background colors */
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      
+      tr:nth-child(odd) {
+        background-color: #e5e5e5;
+      }
+    </style>
+  </head>
+  <body>
+  <button onclick="getAllUser()">Get Users</button>
+    <script src="app.js"></script>
+  </body>
+</html>

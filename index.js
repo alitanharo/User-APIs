@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
+const cors = require('cors')
 const router = express.Router();
 const usersRepo = require('./repos/usersRepo');
-
+app.use(cors())
 app.use('/api', router);
 app.use(express.json())
+
 
 router.get('/', (req, res, next) => {
     usersRepo.get(data => {
@@ -158,6 +160,30 @@ router.delete('/:id', (req, res, next) => {
 });
 
 
+function errorBuilder(err){
+    return {
+        "status": 500,
+        "statusText": "Internal server error",
+        "message": err.message,
+        "error": {
+            "errno":err.errno,
+            "call":err.syscall,
+            "code": "NOT_FOUND",
+            "message": err.message
+    }
+}
+}
+
+app.use(function (err, req, res, next) {
+    console.log(res.status(500).json(errorBuilder(err)));
+   
+    next(err)
+})
+
+
+app.use(function(err,req,res,next){
+    res.status(500).json(errorBuilder(err))
+})
 
 
 app.listen(3000, () => console.log("server is running on port 3000"));
